@@ -18,15 +18,15 @@ class EmployeeController extends Controller
     {
        $query = $request->input('search');
        $employees = DB::table('employees')
-       ->where(function ($q) use ($query) { // ใช้ closure เพื่อจัดกลุ่มเงื่อนไข
-        $q->where('first_name', 'like', '%' . $query . '%')
-          ->orWhere('last_name', 'like', '%' . $query . '%')
-          ->orWhere('birth_date', 'like', '%' . $query . '%');
-    })
-       ->paginate(10);
+        ->where('first_name', 'like', '%' . $query . '%')
+        ->orWhere('last_name', 'like', '%' . $query . '%')
+        ->orWhere('gender', 'like','%' . $query . '%' )
+        ->orWhere('birth_date', 'like', '%' . $query . '%')
+        ->orWhere('emp_no', '=', $query)
+        ->paginate(10);
        
        //$data = json_decode(json_encode($employees),true); //ใช้ json ในการสร้าง array
-       Log::info($employees);
+       Log::info($employees);// บันทึกข้อมูล $employees ลงใน log
 
        //return response($data);
        //กำหนด Controller ให้ส่งผลลัพธ์ไปแสดงผลที่ VUE
