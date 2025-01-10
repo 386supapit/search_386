@@ -21,12 +21,12 @@ class EmployeeController extends Controller
         ->where('first_name', 'like', '%' . $query . '%')
         ->orWhere('last_name', 'like', '%' . $query . '%')
         ->orWhere('gender', 'like','%' . $query . '%' )
-        ->orWhere('birth_date', 'like', '%' . $query . '%')
+        ->orWhere('birth_date', '=', $query)
         ->orWhere('emp_no', '=', $query)
         ->paginate(10);
        
        //$data = json_decode(json_encode($employees),true); //ใช้ json ในการสร้าง array
-       Log::info($employees);// บันทึกข้อมูล $employees ลงใน log
+       Log::info($employees);
 
        //return response($data);
        //กำหนด Controller ให้ส่งผลลัพธ์ไปแสดงผลที่ VUE

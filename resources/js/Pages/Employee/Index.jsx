@@ -115,21 +115,17 @@ export default function Index({ employees, query }) {
                 >
                     Previous
                 </button>
-                        {Array.from({ length: employees.last_page }, (_, i) => i + 1)
-                .slice(
-                    Math.max(0, employees.current_page - 5), 
-                    Math.min(employees.last_page, employees.current_page + 5)
-                )
-                .map((page) => (
-                    <button
-                        key={page}
-                        onClick={() => Inertia.visit(`/employee?page=${page}`)}
-                        className={`px-4 py-2 hover:bg-green-700 hover:text-white ${
-                            employees.current_page === page ? 'bg-green-700 text-white' : 'bg-white'
-                        }`}
-                    >
-                        {page}
-                    </button>
+                {/* แสดงเลขหน้า */}
+                {Array.from({ length: employees.last_page }, (_, i) => i + 1).map((page) => (
+                <button
+                    key={page}
+                    onClick={() => Inertia.visit(`/employee?page=${page}`)} 
+                    className={`px-4 py-2 hover:bg-green-700 hover:text-white ${
+                        employees.current_page === page ? 'bg-green-700 text-white' : 'bg-white' 
+                    }`}
+                >
+                {page}
+                </button>
                 ))}
                 <button
                     disabled={!employees.next_page_url} // ปิดการใช้งานปุ่มถ้าไม่มีหน้าถัดไป
